@@ -180,43 +180,6 @@ let currentTotal = 0;
 let buffer = "0";
 let previousOperator = null;
 
-// (renderNavigation = () => {
-//     const nav_wrap = document.createElement("div");
-//     nav_wrap.classList.add("nav_wrap");
-//
-//     const nav = document.createElement("div");
-//     nav.classList.add("navigation");
-//     nav_wrap.appendChild(nav);
-//
-//     const img = document.createElement("img");
-//     img.classList.add("settings");
-//     img.alt = "settings";
-//     img.src = "./imgs/settings.png";
-//     nav.appendChild(img);
-//
-//     const select_wrap = document.createElement("div");
-//     select_wrap.classList.add("select_wrap");
-//     nav_wrap.appendChild(select_wrap);
-//
-//     const select = document.createElement("div");
-//     select_wrap.classList.add("select");
-//     select_wrap.appendChild(select);
-//
-//     const simple = document.createElement("div");
-//     simple.classList.add("value");
-//     simple.id = "simple";
-//     simple.textContent = "Simple mode"
-//     select.appendChild(simple);
-//
-//     const scientific = document.createElement("div");
-//     scientific.classList.add("value");
-//     scientific.id = "scientific";
-//     scientific.textContent = "Scientific mode"
-//     select.appendChild(scientific);
-//
-//     document.getElementById("scientific_calc").appendChild(nav_wrap);
-// })();
-
 const select = document.querySelector(".select_wrap");
 const historyContainer = document.getElementById("history");
 
@@ -245,7 +208,6 @@ const changeCalculatorMode = () => {
 
 const addListenerToButtons = (node) => {
     node.addEventListener("click",(event) => {
-        console.log(event.target.innerHTML)
         buttonClick(event.target.innerHTML);
     });
 };
@@ -424,8 +386,15 @@ const flushOperation = (internalBuffer) => {
     }else if(previousOperator === "x^"){
         currentTotal = Math.pow(currentTotal, internalBuffer);
     }else{
+        if(internalBuffer === 0) {
+            currentTotal = 'Error'
+            console.log(currentTotal, operand1, previousOperator, internalBuffer);
+            logHistory(currentTotal, operand1, previousOperator, internalBuffer);
+            return;
+        }
         currentTotal /= internalBuffer;
     }
+    console.log(currentTotal, operand1, previousOperator, internalBuffer);
     logHistory(currentTotal, operand1, previousOperator, internalBuffer);
 };
 
@@ -436,7 +405,7 @@ const rerenderScreen = () => {
 const logHistory = (result, operand1, operator, operand2 = null) => {
     const log = document.createElement("li");
     let logString = '';
-    if(operand2) {
+    if(operand2 !== null) {
         if(operator === "x^") {
             logString = `${operand1}<sup>${operand2}</sup> = ${result}`;
         }else{

@@ -6,7 +6,6 @@
     --orange: #f39c12;
     --bg: #ffd19d
 }
-/* quick reset so all our padding is the right size */
 * {
     box-sizing: border-box;
 }
@@ -67,14 +66,9 @@ html, body, .wrapper {
     /*background: linear-gradient(30deg, #f39c12 30%, #f1c40f);*/
 }
 .wrapper {
-    /*background: linear-gradient(#fad7b3, #e8ba7e);*/
     padding: 1em;
     background: var(--bg);
-    /*background-color: peachpuff;*/
     display: flex;
-    /*flex-direction: column;*/
-    /*align-items: center;*/
-    /*justify-content: space-around;*/
 }
 .wrapper > div {
     flex: 1;
@@ -83,12 +77,10 @@ html, body, .wrapper {
     align-items: center;
 }
 select {
-    /* Reset Select */
     appearance: none;
     outline: 0;
     border: 0;
     box-shadow: none;
-    /* Personalize */
     flex: 1;
     padding: 0 1em;
     color: var(--black);
@@ -96,11 +88,6 @@ select {
     background-image: none;
     cursor: pointer;
 }
-/* Remove IE arrow */
-select::-ms-expand {
-    display: none;
-}
-/* Custom Select wrapper */
 .nav_wrap {
     position: relative;
 }
@@ -112,7 +99,6 @@ select::-ms-expand {
     display: block;
 }
 .select {
-    /*position: absolute;*/
     background-color: white;
     width: 10em;
     border-radius: .25em;
